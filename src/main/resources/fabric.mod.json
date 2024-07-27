@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"me.datsuns.soulslikedeaths.SoulslikeDeathsClient"
+		],
+		"modmenu": [
+			"me.datsuns.soulslikedeaths.ModMenuIntegration"
 		]
 	},
 	"mixins": [
