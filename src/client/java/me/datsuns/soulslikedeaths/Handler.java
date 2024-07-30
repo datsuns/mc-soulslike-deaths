@@ -12,13 +12,13 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     private Judge j;
     private PlayerEntity p;
     private UUID id;
-    private HandlerEntry onEndTick;
+    private HandlerEntry onEndTickBody;
 
     public Handler(){
         this.j = new Judge();
         this.p = null;
         this.id = null;
-        this.onEndTick = new DefaultEndTickHandler();
+        this.onEndTickBody = new DefaultEndTickHandler();
     }
 
     private void load(MinecraftServer server) {
@@ -32,15 +32,17 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
             return;
         }
         this.p = server.getPlayerManager().getPlayer(this.id);
-        this.onEndTick = new EndTickHandler();
+        this.onEndTickBody = new EndTickHandler();
     }
 
+    // ServerTick
     @Override
     public void onEndTick(MinecraftServer server) {
         load(server);
-        this.onEndTick.execute(this.j, this.p);
+        this.onEndTickBody.execute(this.j, this.p);
     }
 
+    // ClientTick
     @Override
     public void onEndTick(MinecraftClient client) {
         if(this.id != null){
