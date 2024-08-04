@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.ConfigData;
 @me.shedaniel.autoconfig.annotation.Config(name = "soulslike-deaths")
 class Config implements ConfigData {
     boolean deathInWater = true;
+    boolean deathOnDamaged = true;
 
     private Config() {
     }
@@ -20,5 +21,9 @@ class Config implements ConfigData {
 
     public void toggleDeathInWater() {
         this.deathInWater = !this.deathInWater;
+    }
+
+    public void toggleDeathOnDamaged() {
+        this.deathOnDamaged = !this.deathOnDamaged;
     }
 }

@@ -9,4 +9,8 @@ public class Judge {
         }
         return false;
     }
+
+    public boolean onDamaged(float amount) {
+        return SoulslikeDeathsClient.cfg.deathOnDamaged;
+    }
 }

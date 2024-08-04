@@ -1,17 +1,19 @@
 package me.datsuns.soulslikedeaths;
 
+import me.datsuns.soulslikedeaths.event.ClientDamagedCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 
-public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTick, ServerLifecycleEvents.ServerStopped, ServerPlayerEvents.AfterRespawn {
+public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTick, ServerLifecycleEvents.ServerStopped, ServerPlayerEvents.AfterRespawn, ClientDamagedCallback {
     private Judge j;
     private PlayerEntity p;
     private UUID id;
@@ -76,6 +78,16 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
         this.id = newPlayer.getUuid();
         this.p  = newPlayer.getServer().getPlayerManager().getPlayer(this.id);
         SoulslikeDeaths.LOGGER.info("player from {} to {}", old, this.p);
+    }
+
+    // client damaged callback
+    @Override
+    public float interact(DamageSource source, float amount) {
+        if( this.j.onDamaged(amount) ){
+            //SoulslikeDeaths.LOGGER.info("force death on damaged");
+            return Float.MAX_VALUE;
+        }
+        return amount;
     }
 
     public interface HandlerEntry {

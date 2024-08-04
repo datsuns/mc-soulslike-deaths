@@ -2,5 +2,6 @@
   "option_title": "死に至る条件",
   "option.true": "死ぬ",
   "option.false": "生存",
-  "option.deathInWater.title": "水中"
+  "option.deathInWater.title": "水に入ると",
+  "option.deathOnDamaged.title": "ダメージを受けたら"
 }

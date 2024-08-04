@@ -1,5 +1,6 @@
 package me.datsuns.soulslikedeaths;
 
+import me.datsuns.soulslikedeaths.event.ClientDamagedCallback;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -7,6 +8,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.util.ActionResult;
 
 public class SoulslikeDeathsClient implements ClientModInitializer {
 	public static Config cfg;
@@ -20,5 +23,6 @@ public class SoulslikeDeathsClient implements ClientModInitializer {
 		ServerTickEvents.END_SERVER_TICK.register(h);
 		ServerPlayerEvents.AFTER_RESPAWN.register(h);
 		ServerLifecycleEvents.SERVER_STOPPED.register(h);
+		ClientDamagedCallback.EVENT.register(h);
 	}
 }

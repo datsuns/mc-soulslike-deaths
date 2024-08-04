@@ -36,22 +36,15 @@ public class ConfigScreen extends GameOptionsScreen {
         return buildButtonTitle("option.deathInWater.title", SoulslikeDeathsClient.cfg.deathInWater);
     }
 
+    protected Text buildDeathOnDamagedButtonTitle() {
+        return buildButtonTitle("option.deathOnDamaged.title", SoulslikeDeathsClient.cfg.deathOnDamaged);
+    }
+
     @Override
     protected void init(){
-        this.addDrawableChild(
-                ButtonWidget.builder(
-                                buildDeathInWaterButtonTitle(),
-                                button -> {
-                                    SoulslikeDeathsClient.cfg.toggleDeathInWater();
-                                    button.setMessage(buildDeathInWaterButtonTitle());
-                                }
-                        )
-                        .dimensions(
-                                posXCenter(this.ButtonWidth),
-                                20,
-                                this.ButtonWidth, this.ButtonHeight)
-                        .build()
-        );
+        this.addDrawableChild(buildDeathInWaterButton(20));
+        this.addDrawableChild(buildDeathOnDamagedButton(40));
+
         this.addDrawableChild(
                 ButtonWidget.builder(
                                 Text.of("Done"),
@@ -66,6 +59,36 @@ public class ConfigScreen extends GameOptionsScreen {
                                 this.ButtonWidth, this.ButtonHeight)
                         .build()
         );
+    }
+
+    ButtonWidget buildDeathInWaterButton(int yPos) {
+        return ButtonWidget.builder(
+                        buildDeathInWaterButtonTitle(),
+                        button -> {
+                            SoulslikeDeathsClient.cfg.toggleDeathInWater();
+                            button.setMessage(buildDeathInWaterButtonTitle());
+                        }
+                )
+                .dimensions(
+                        posXCenter(this.ButtonWidth),
+                        yPos,
+                        this.ButtonWidth, this.ButtonHeight)
+                .build();
+    }
+
+    ButtonWidget buildDeathOnDamagedButton(int yPos) {
+        return ButtonWidget.builder(
+                        buildDeathOnDamagedButtonTitle(),
+                        button -> {
+                            SoulslikeDeathsClient.cfg.toggleDeathOnDamaged();
+                            button.setMessage(buildDeathOnDamagedButtonTitle());
+                        }
+                )
+                .dimensions(
+                        posXCenter(this.ButtonWidth),
+                        yPos,
+                        this.ButtonWidth, this.ButtonHeight)
+                .build();
     }
 
     @Override

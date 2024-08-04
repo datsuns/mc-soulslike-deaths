@@ -3,7 +3,6 @@ package me.datsuns.soulslikedeaths.mixin.client;
 import me.datsuns.soulslikedeaths.event.ClientDamagedCallback;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
