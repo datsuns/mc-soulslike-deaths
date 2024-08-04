@@ -3,17 +3,17 @@
 	"id": "soulslike-deaths",
 	"version": "${version}",
 	"name": "Soulslike Deaths",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Extreme Minecraft! Can you survive??",
 	"authors": [
-		"Me!"
+		"datsuns"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/datsuns/mc-soulslike-deaths",
+		"sources": "https://github.com/datsuns/mc-soulslike-deaths"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/soulslike-deaths/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 			"me.datsuns.soulslikedeaths.SoulslikeDeaths"
