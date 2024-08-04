@@ -1,1 +1,10 @@
-[ ]reload player instance on respawn
+[x]reload player instance on respawn
+[x]condition: water
+[ ]condition: any damage
+[ ]condition: head shot
+[ ]condition: trading
+[ ]condition: burn
+[ ]condition: cold
+[ ]condition: rainy
+[ ]condition: jumping
+[ ]condition: running
