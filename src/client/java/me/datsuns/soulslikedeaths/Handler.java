@@ -9,12 +9,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 
 public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTick, ServerLifecycleEvents.ServerStopped, ServerPlayerEvents.AfterRespawn, ClientDamagedCallback {
-    private Judge j;
+    private final Judge j;
     private PlayerEntity p;
     private UUID id;
     private HandlerEntry onEndTickBody;
@@ -49,7 +50,7 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     public void onEndTick(MinecraftServer server) {
         if( !load(server) ){
             return;
-        };
+        }
         this.onEndTickBody.execute(this.j, this.p);
     }
 
@@ -76,7 +77,11 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     public void afterRespawn(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
         PlayerEntity old = this.p;
         this.id = newPlayer.getUuid();
-        this.p  = newPlayer.getServer().getPlayerManager().getPlayer(this.id);
+        PlayerManager pm = newPlayer.getServer().getPlayerManager();
+        if( pm == null ){
+            return;
+        }
+        this.p  = pm.getPlayer(this.id);
         SoulslikeDeaths.LOGGER.info("player from {} to {}", old, this.p);
     }
 

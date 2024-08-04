@@ -1,10 +1,8 @@
 package me.datsuns.soulslikedeaths.event;
 
-import me.datsuns.soulslikedeaths.SoulslikeDeaths;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.util.ActionResult;
 
 public interface ClientDamagedCallback {
     Event<ClientDamagedCallback> EVENT = EventFactory.createArrayBacked(

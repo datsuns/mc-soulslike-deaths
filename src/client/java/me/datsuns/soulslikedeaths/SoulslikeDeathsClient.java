@@ -8,12 +8,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.util.ActionResult;
 
 public class SoulslikeDeathsClient implements ClientModInitializer {
 	public static Config cfg;
-	public Handler h;
 	@Override
 	public void onInitializeClient() {
 		AutoConfig.register(Config.class, Toml4jConfigSerializer::new);
