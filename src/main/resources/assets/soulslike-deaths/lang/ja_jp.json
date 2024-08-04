@@ -1,6 +1,6 @@
 {
-  "option_title": "Mod Menu Options",
-  "option.true": "する",
-  "option.false": "しない",
-  "option.deathInWater.title": "水中で死ぬ"
+  "option_title": "死に至る条件",
+  "option.true": "死ぬ",
+  "option.false": "生存",
+  "option.deathInWater.title": "水中"
 }

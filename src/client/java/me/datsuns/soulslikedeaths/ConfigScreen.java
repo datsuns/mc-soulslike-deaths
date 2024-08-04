@@ -17,8 +17,8 @@ public class ConfigScreen extends GameOptionsScreen {
     protected ConfigScreen(Screen parent) {
         super(parent, MinecraftClient.getInstance().options, Text.translatable("option_title"));
         this.parent = parent;
-        this.TRUE = "§a" + Text.translatable("option.true").getString();
-        this.FALSE = "§c" + Text.translatable("option.false").getString();
+        this.TRUE = "§c" + Text.translatable("option.true").getString();
+        this.FALSE = "§a" + Text.translatable("option.false").getString();
         this.ButtonWidth  = 200;
         this.ButtonHeight = 20;
     }
@@ -77,5 +77,6 @@ public class ConfigScreen extends GameOptionsScreen {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(textRenderer, Text.translatable("option_title"), width / 2, 5, 0xFFFFFF);
     }
 }
