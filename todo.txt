@@ -1,11 +1,16 @@
 [x]reload player instance on respawn
 [x]condition: water
-[ ]condition: any damage
+[x]condition: any damage
 [ ]condition: sleep
 [ ]condition: head shot
 [ ]condition: trading
 [ ]condition: burn
 [ ]condition: cold
 [ ]condition: rainy
+[ ]condition: eating
 [ ]condition: jumping
 [ ]condition: running: getMovementSpeed()?
+
+[ ]death text: special text
+[ ]randomized death: switch when died
+[ ]peacefull: attacking to any mob
