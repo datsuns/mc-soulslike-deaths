@@ -14,3 +14,4 @@
 [ ]death text: special text
 [ ]randomized death: switch when died
 [ ]peacefull: attacking to any mob
+[ ]show condition: show current death condition o HUD
