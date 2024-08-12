@@ -30,4 +30,10 @@
 * ModMenuのメニューを通じて設定が可能です
 * <img src="images/gallery_image_ja_1.png" alt="Config Screen" width="70%"/>
 
+# 設定できる項目
+
+- 水に入ったら💀
+- いかなるダメージを受けても💀
+- ヘッドショット💀
+
 良いマインクラフトを！ 😉

@@ -2,7 +2,7 @@
 [x]condition: water
 [x]condition: any damage
 [ ]condition: sleep
-[ ]condition: head shot
+[x]condition: head shot
 [ ]condition: trading
 [ ]condition: burn
 [ ]condition: cold

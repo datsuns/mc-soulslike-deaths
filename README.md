@@ -32,4 +32,10 @@ please download published .jar from [Modrinth Soulslike Deaths](https://modrinth
 * set death conditions by ModMenu !
 * <img src="images/gallery_image_en_1.png" alt="Config Screen" width="70%"/>
 
+# supported extremely conditions
+
+- in water
+- on any damaged
+- damaged by head shot
+
 Please Enjoy 😉
