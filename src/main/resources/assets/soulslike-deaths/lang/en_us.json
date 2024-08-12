@@ -3,5 +3,6 @@
   "option.true": "Death",
   "option.false": "Alive",
   "option.deathInWater.title": "death in water",
-  "option.deathOnDamaged.title": "death on damaged"
+  "option.deathOnDamaged.title": "death on damaged",
+  "option.deathByHeadShot.title": "death by head shot"
 }
