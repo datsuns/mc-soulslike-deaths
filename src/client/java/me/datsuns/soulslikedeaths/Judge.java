@@ -1,5 +1,6 @@
 package me.datsuns.soulslikedeaths;
 
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class Judge {
@@ -10,7 +11,16 @@ public class Judge {
         return false;
     }
 
-    public boolean onDamaged(float amount) {
-        return SoulslikeDeathsClient.cfg.deathOnDamaged;
+    public boolean onDamaged(PlayerEntity player, DamageSource source, float amount) {
+        if( SoulslikeDeathsClient.cfg.deathOnDamaged ){
+            return true;
+        }
+        if( SoulslikeDeathsClient.cfg.deathByHeadShot ) {
+            double threshold = player.getY() + 1.5;
+            if( source.getPosition().getY() > threshold ) {
+                return true;
+            }
+        }
+        return false;
     }
 }

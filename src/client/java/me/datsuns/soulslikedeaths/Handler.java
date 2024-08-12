@@ -87,8 +87,8 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
 
     // client damaged callback
     @Override
-    public float interact(DamageSource source, float amount) {
-        if( this.j.onDamaged(amount) ){
+    public float interact(PlayerEntity player, DamageSource source, float amount) {
+        if( this.j.onDamaged(player, source, amount) ){
             //SoulslikeDeaths.LOGGER.info("force death on damaged");
             return Float.MAX_VALUE;
         }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class ClientDamagedMixin {
     @ModifyArg(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", index = 1,  at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private float injectDamageValue(DamageSource source, float amount) {
-        float result = ClientDamagedCallback.EVENT.invoker().interact(source, amount);
+        float result = ClientDamagedCallback.EVENT.invoker().interact((PlayerEntity) (Object) this, source, amount);
         return result;
     }
 }
