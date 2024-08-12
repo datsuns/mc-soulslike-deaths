@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.ConfigData;
 class Config implements ConfigData {
     boolean deathInWater = true;
     boolean deathOnDamaged = true;
+    boolean deathByHeadShot = true;
 
     private Config() {
     }
@@ -25,5 +26,9 @@ class Config implements ConfigData {
 
     public void toggleDeathOnDamaged() {
         this.deathOnDamaged = !this.deathOnDamaged;
+    }
+
+    public void toggleDeathByHeadShot() {
+        this.deathByHeadShot = !this.deathByHeadShot;
     }
 }
