@@ -8,6 +8,7 @@ class Config implements ConfigData {
     boolean deathInWater = true;
     boolean deathOnDamaged = true;
     boolean deathByHeadShot = true;
+    boolean deathWhenRunning = true;
 
     private Config() {
     }
@@ -30,5 +31,9 @@ class Config implements ConfigData {
 
     public void toggleDeathByHeadShot() {
         this.deathByHeadShot = !this.deathByHeadShot;
+    }
+
+    public void toggleDeathWhenRunning() {
+        this.deathWhenRunning = !this.deathWhenRunning;
     }
 }

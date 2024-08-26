@@ -5,9 +5,16 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class Judge {
     public final double HeightThreshold = 1.5;
+    public final double SpeedThreshold = 0.275;
     public boolean onTick(PlayerEntity p){
         if( p.isWet() ) {
             return SoulslikeDeathsClient.cfg.deathInWater;
+        }
+        if( SoulslikeDeathsClient.cfg.deathWhenRunning ) {
+            double speed = p.getMovement().horizontalLength();
+            if( speed > this.SpeedThreshold ) {
+                return true;
+            }
         }
         return false;
     }

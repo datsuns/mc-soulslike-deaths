@@ -44,11 +44,16 @@ public class ConfigScreen extends GameOptionsScreen {
         return buildButtonTitle("option.deathByHeadShot.title", SoulslikeDeathsClient.cfg.deathByHeadShot);
     }
 
+    protected Text buildDeathWhenRunningButtonTitle() {
+        return buildButtonTitle("option.deathWhenRunning.title", SoulslikeDeathsClient.cfg.deathWhenRunning);
+    }
+
     @Override
     protected void init(){
         this.addDrawableChild(buildDeathInWaterButton(20));
         this.addDrawableChild(buildDeathOnDamagedButton(40));
         this.addDrawableChild(buildDeathByHeadShotButton(60));
+        this.addDrawableChild(buildDeathWhenRunningButton(80));
 
         this.addDrawableChild(
                 ButtonWidget.builder(
@@ -104,6 +109,18 @@ public class ConfigScreen extends GameOptionsScreen {
                         button -> {
                             SoulslikeDeathsClient.cfg.toggleDeathByHeadShot();
                             button.setMessage(buildDeathByHeadShotButtonTitle());
+                        }
+                ),
+                yPos
+        );
+    }
+
+    ButtonWidget buildDeathWhenRunningButton(int yPos) {
+        return buildButton( ButtonWidget.builder(
+                        buildDeathWhenRunningButtonTitle(),
+                        button -> {
+                            SoulslikeDeathsClient.cfg.toggleDeathWhenRunning();
+                            button.setMessage(buildDeathWhenRunningButtonTitle());
                         }
                 ),
                 yPos

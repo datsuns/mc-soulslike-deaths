@@ -107,6 +107,7 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     public class EndTickHandler implements HandlerEntry {
         @Override
         public void execute(Judge j, PlayerEntity p) {
+            //SoulslikeDeaths.LOGGER.info("tick {}", p.getMovementSpeed());
             if( j.onTick(p) ){
                 //SoulslikeDeaths.LOGGER.info("kill");
                 p.damage(p.getDamageSources().generic(), Float.MAX_VALUE);

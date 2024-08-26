@@ -4,5 +4,6 @@
   "option.false": "生存",
   "option.deathInWater.title": "水に入ると",
   "option.deathOnDamaged.title": "ダメージを受けたら",
-  "option.deathByHeadShot.title": "ヘッドショットで"
+  "option.deathByHeadShot.title": "ヘッドショットで",
+  "option.deathWhenRunning.title": "走ったら"
 }
