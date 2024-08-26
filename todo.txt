@@ -9,7 +9,7 @@
 [ ]condition: rainy
 [ ]condition: eating
 [ ]condition: jumping
-[ ]condition: running: getMovementSpeed()?
+[x]condition: running
 
 [ ]death text: special text
 [ ]randomized death: switch when died

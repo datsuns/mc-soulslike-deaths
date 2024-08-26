@@ -37,5 +37,6 @@ please download published .jar from [Modrinth Soulslike Deaths](https://modrinth
 - in water
 - on any damaged
 - damaged by head shot
+- running
 
 Please Enjoy 😉
