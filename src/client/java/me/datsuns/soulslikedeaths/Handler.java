@@ -9,14 +9,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.UUID;
 
 public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTick, ServerLifecycleEvents.ServerStopped, ServerPlayerEvents.AfterRespawn, ClientDamagedCallback {
     private final Judge j;
-    private PlayerEntity p;
+    private ServerPlayerEntity p;
     private UUID id;
     private HandlerEntry onEndTickBody;
 
@@ -28,7 +28,7 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     }
 
     private boolean load(MinecraftServer server) {
-        if( this.p != null ){
+        if( this.p != null && !this.p.isRemoved() ){
             return true;
         }
         if( this.id == null ){
@@ -75,14 +75,9 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
 
     @Override
     public void afterRespawn(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
-        PlayerEntity old = this.p;
         this.id = newPlayer.getUuid();
-        PlayerManager pm = newPlayer.getServer().getPlayerManager();
-        if( pm == null ){
-            return;
-        }
-        this.p  = pm.getPlayer(this.id);
-        SoulslikeDeaths.LOGGER.info("player from {} to {}", old, this.p);
+        this.p  = newPlayer;
+        SoulslikeDeaths.LOGGER.info("player from {} to {}", oldPlayer, this.p);
     }
 
     // client damaged callback
@@ -96,21 +91,24 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     }
 
     public interface HandlerEntry {
-        void execute(Judge j, PlayerEntity p);
+        void execute(Judge j, ServerPlayerEntity p);
     }
 
     public class DefaultEndTickHandler implements HandlerEntry {
         @Override
-        public void execute(Judge j, PlayerEntity p) {}
+        public void execute(Judge j, ServerPlayerEntity p) {}
     }
 
     public class EndTickHandler implements HandlerEntry {
         @Override
-        public void execute(Judge j, PlayerEntity p) {
+        public void execute(Judge j, ServerPlayerEntity p) {
             //SoulslikeDeaths.LOGGER.info("tick {}", p.getMovementSpeed());
             if( j.onTick(p) ){
                 //SoulslikeDeaths.LOGGER.info("kill");
-                p.damage(p.getDamageSources().generic(), Float.MAX_VALUE);
+                ServerWorld world = p.getEntityWorld();
+                if(world != null){
+                    p.damage(world, p.getDamageSources().generic(), Float.MAX_VALUE);
+                }
             }
         }
     }
