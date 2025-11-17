@@ -15,7 +15,7 @@ public class SoulslikeDeathsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		AutoConfig.register(Config.class, Toml4jConfigSerializer::new);
 		cfg = AutoConfig.getConfigHolder(Config.class).getConfig();
-		Handler h = new Handler();
+		Handler h = new Handler(cfg);
 		ClientTickEvents.END_CLIENT_TICK.register(h);
 		ServerTickEvents.END_SERVER_TICK.register(h);
 		ServerPlayerEvents.AFTER_RESPAWN.register(h);

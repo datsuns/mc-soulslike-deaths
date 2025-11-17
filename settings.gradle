@@ -8,3 +8,6 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
+
+rootProject.name = "soulslike-deaths"
+include("common", "fabric")

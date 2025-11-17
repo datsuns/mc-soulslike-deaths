@@ -1,5 +1,9 @@
 package me.datsuns.soulslikedeaths;
 
+import me.datsuns.soulslikedeaths.common.DamageContext;
+import me.datsuns.soulslikedeaths.common.Judge;
+import me.datsuns.soulslikedeaths.common.MovementContext;
+import me.datsuns.soulslikedeaths.common.SoulslikeDeathsConfig;
 import me.datsuns.soulslikedeaths.event.ClientDamagedCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -11,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.UUID;
 
@@ -20,8 +25,8 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     private UUID id;
     private HandlerEntry onEndTickBody;
 
-    public Handler(){
-        this.j = new Judge();
+    public Handler(SoulslikeDeathsConfig config){
+        this.j = new Judge(config);
         this.p = null;
         this.id = null;
         this.onEndTickBody = new DefaultEndTickHandler();
@@ -83,7 +88,14 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
     // client damaged callback
     @Override
     public float interact(PlayerEntity player, DamageSource source, float amount) {
-        if( this.j.onDamaged(player, source, amount) ){
+        Vec3d damagePos = source.getPosition();
+        boolean isHeadShot = false;
+        if(damagePos != null) {
+            double threshold = player.getY() + Judge.HEADSHOT_HEIGHT_THRESHOLD;
+            isHeadShot = damagePos.getY() > threshold;
+        }
+        DamageContext damageContext = new DamageContext(isHeadShot);
+        if( this.j.shouldDieFromDamage(damageContext) ){
             //SoulslikeDeaths.LOGGER.info("force death on damaged");
             return Float.MAX_VALUE;
         }
@@ -103,7 +115,10 @@ public class Handler implements ServerTickEvents.EndTick, ClientTickEvents.EndTi
         @Override
         public void execute(Judge j, ServerPlayerEntity p) {
             //SoulslikeDeaths.LOGGER.info("tick {}", p.getMovementSpeed());
-            if( j.onTick(p) ){
+            boolean inWater = p.isTouchingWaterOrRain();
+            double speed = p.getMovement().horizontalLength();
+            MovementContext context = new MovementContext(inWater, speed);
+            if( j.shouldDieFromMovement(context) ){
                 //SoulslikeDeaths.LOGGER.info("kill");
                 ServerWorld world = p.getEntityWorld();
                 if(world != null){

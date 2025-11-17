@@ -1,0 +1,14 @@
+plugins {
+	id 'java-library'
+}
+
+java {
+	withSourcesJar()
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
