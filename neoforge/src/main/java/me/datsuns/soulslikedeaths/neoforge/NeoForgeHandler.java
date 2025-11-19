@@ -28,6 +28,9 @@ public class NeoForgeHandler {
         }
         boolean inWater = player.isInWaterOrRain();
         double horizontalSpeed = player.getDeltaMovement().horizontalDistance();
+        if (player.isSprinting()) {
+            horizontalSpeed = Math.max(horizontalSpeed, Judge.SPEED_THRESHOLD + 0.1);
+        }
         MovementContext context = new MovementContext(inWater, horizontalSpeed);
         if (judge.shouldDieFromMovement(context)) {
             player.hurt(player.damageSources().generic(), Float.MAX_VALUE);
