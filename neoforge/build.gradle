@@ -107,6 +107,7 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+	archiveFileName = "${project.archives_base_name}-${project.version}-neoforge.jar"
 }
 
 publishing {

@@ -66,10 +66,23 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+	archiveFileName = "${project.archives_base_name}-${project.version}-fabric.jar"
 }
 
 sourceSets.main.resources {
 	srcDir project(":common").file("src/main/resources")
+}
+
+tasks.named("remapJar") {
+	archiveFileName = "${project.archives_base_name}-${project.version}-fabric.jar"
+}
+
+tasks.named("sourcesJar") {
+	archiveFileName = "${project.archives_base_name}-${project.version}-fabric-sources.jar"
+}
+
+tasks.named("remapSourcesJar") {
+	archiveFileName = "${project.archives_base_name}-${project.version}-fabric-sources.jar"
 }
 
 // configure the maven publication
