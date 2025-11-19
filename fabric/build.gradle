@@ -107,8 +107,8 @@ import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
 	token = System.getenv('MODRINTH_TOKEN') // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
 	projectId = "${project.modrinth_project_id}" // The ID of your Modrinth project. Slugs will not work.
-	versionNumber = "${project.mod_version}" // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
-	versionName = "v${project.mod_version}-mc${project.minecraft_version}"  // The version title. If not specified, it'll use the version number
+	versionNumber = "${project.mod_version}-fabric" // differentiate per loader
+	versionName = "v${project.mod_version}-mc${project.minecraft_version}-fabric"
 	uploadFile = remapJar // Tells Minotaur to use the remapped jar
 	gameVersions = ['1.21.10'] // An array of game versions the version supports
 	loaders = ['fabric'] // Self-explanatory.

@@ -13,3 +13,7 @@ allprojects {
 		maven { url "https://maven.shedaniel.me/" }
 	}
 }
+
+tasks.register("modrinth") {
+	dependsOn(":fabric:modrinth", ":neoforge:modrinth")
+}
