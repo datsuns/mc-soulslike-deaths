@@ -1,0 +1,17 @@
+{
+  "option_title": "死に至る条件",
+  "option.true": "死ぬ",
+  "option.false": "生存",
+  "option.deathInWater.title": "水に入ると",
+  "option.deathOnDamaged.title": "ダメージを受けたら",
+  "option.deathByHeadShot.title": "ヘッドショットで",
+  "option.deathWhenRunning.title": "走ったら",
+  "text.config.soulslikedeaths.deathInWater": "水に入ると",
+  "text.config.soulslikedeaths.deathOnDamaged": "ダメージを受けたら",
+  "text.config.soulslikedeaths.deathByHeadShot": "ヘッドショットで",
+  "text.config.soulslikedeaths.deathWhenRunning": "走ったら",
+  "soulslikedeaths.configuration.title": "Soulslike Deaths",
+  "soulslikedeaths.configuration.section.soulslikedeaths-client.toml": "Soulslike Deaths",
+  "soulslikedeaths.configuration.section.soulslikedeaths-client.toml.title": "Soulslike Deaths",
+  "soulslikedeaths.configuration.conditions": "死の条件"
+}

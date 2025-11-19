@@ -1,0 +1,17 @@
+{
+  "option_title": "Your DEATH Conditions",
+  "option.true": "Death",
+  "option.false": "Alive",
+  "option.deathInWater.title": "death in water",
+  "option.deathOnDamaged.title": "death on damaged",
+  "option.deathByHeadShot.title": "death by head shot",
+  "option.deathWhenRunning.title": "death when running",
+  "text.config.soulslikedeaths.deathInWater": "death in water",
+  "text.config.soulslikedeaths.deathOnDamaged": "death on damaged",
+  "text.config.soulslikedeaths.deathByHeadShot": "death by head shot",
+  "text.config.soulslikedeaths.deathWhenRunning": "death when running",
+  "soulslikedeaths.configuration.title": "Soulslike Deaths",
+  "soulslikedeaths.configuration.section.soulslikedeaths-client.toml": "Soulslike Deaths",
+  "soulslikedeaths.configuration.section.soulslikedeaths-client.toml.title": "Soulslike Deaths",
+  "soulslikedeaths.configuration.conditions": "Death Conditions"
+}

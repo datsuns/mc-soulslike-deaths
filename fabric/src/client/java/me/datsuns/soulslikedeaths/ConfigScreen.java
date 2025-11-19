@@ -5,20 +5,22 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 public class ConfigScreen extends GameOptionsScreen {
     public final int ButtonWidth;
     public final int ButtonHeight;
     private final Screen parent;
-    public final String TRUE;
-    public final String FALSE;
+    private final Text TRUE;
+    private final Text FALSE;
 
     protected ConfigScreen(Screen parent) {
         super(parent, MinecraftClient.getInstance().options, Text.translatable("option_title"));
         this.parent = parent;
-        this.TRUE = "§c" + Text.translatable("option.true").getString();
-        this.FALSE = "§a" + Text.translatable("option.false").getString();
+        this.TRUE = Text.literal(Text.translatable("option.true").getString()).styled(style -> style.withColor(Formatting.RED));
+        this.FALSE = Text.literal(Text.translatable("option.false").getString()).styled(style -> style.withColor(Formatting.GREEN));
         this.ButtonWidth  = 200;
         this.ButtonHeight = 20;
     }
@@ -28,8 +30,9 @@ public class ConfigScreen extends GameOptionsScreen {
     }
 
     protected Text buildButtonTitle(String key, boolean value) {
-        String t = Text.translatable(key).getString() + " : " + (value ? this.TRUE : this.FALSE);
-        return Text.of(t);
+        String label = Text.translatable(key).getString();
+        Text state = (value ? this.TRUE : this.FALSE).copy();
+        return Text.literal(label + " : ").append(state);
     }
 
     protected Text buildDeathInWaterButtonTitle() {

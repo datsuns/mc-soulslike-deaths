@@ -10,4 +10,4 @@ pluginManagement {
 }
 
 rootProject.name = "soulslike-deaths"
-include("common", "fabric")
+include("common", "fabric", "neoforge")

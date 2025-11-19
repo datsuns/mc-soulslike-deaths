@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "soulslike-deaths",
+	"id": "soulslikedeaths",
 	"version": "${version}",
 	"name": "Soulslike Deaths",
 	"description": "Extreme Minecraft! Can you survive??",
@@ -12,7 +12,7 @@
 		"sources": "https://github.com/datsuns/mc-soulslike-deaths"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/soulslike-deaths/icon.png",
+	"icon": "assets/soulslikedeaths/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"main": [
@@ -26,9 +26,9 @@
 		]
 	},
 	"mixins": [
-		"soulslike-deaths.mixins.json",
+		"soulslikedeaths.mixins.json",
 		{
-			"config": "soulslike-deaths.client.mixins.json",
+			"config": "soulslikedeaths.client.mixins.json",
 			"environment": "client"
 		}
 	],

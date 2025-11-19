@@ -14,7 +14,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"soulslike-deaths" {
+		"soulslikedeaths" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -61,10 +61,15 @@ java {
 }
 
 jar {
-	from(project(":common").sourceSets.main.output)
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	from(project(":common").sourceSets.main.output.classesDirs)
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+}
+
+sourceSets.main.resources {
+	srcDir project(":common").file("src/main/resources")
 }
 
 // configure the maven publication

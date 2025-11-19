@@ -1,0 +1,21 @@
+package me.datsuns.soulslikedeaths.neoforge;
+
+import com.mojang.logging.LogUtils;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.NeoForge;
+import org.slf4j.Logger;
+
+@Mod(value = SoulslikeDeathsNeoForge.MOD_ID, dist = Dist.CLIENT)
+public class SoulslikeDeathsNeoForge {
+    public static final String MOD_ID = "soulslikedeaths";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public SoulslikeDeathsNeoForge(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, SoulslikeDeathsNeoForgeConfig.SPEC);
+        NeoForge.EVENT_BUS.register(new NeoForgeHandler(SoulslikeDeathsNeoForgeConfig.INSTANCE));
+    }
+}

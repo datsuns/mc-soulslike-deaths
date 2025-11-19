@@ -1,0 +1,123 @@
+import org.slf4j.event.Level
+
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+	id 'net.neoforged.moddev' version '2.0.116'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+base {
+	archivesName = project.archives_base_name
+}
+
+def neoModId = project.findProperty("neoforge_mod_id") ?: project.archives_base_name
+
+dependencies {
+	implementation project(":common")
+}
+
+def runDir = project.file("run")
+
+neoForge {
+	version = project.neoforge_version
+
+	runs {
+		client {
+			client()
+			gameDirectory = runDir
+			systemProperty 'neoforge.enabledGameTestNamespaces', neoModId
+		}
+
+		server {
+			server()
+			gameDirectory = runDir
+			programArgument '--nogui'
+			systemProperty 'neoforge.enabledGameTestNamespaces', neoModId
+		}
+
+		gameTestServer {
+			type = "gameTestServer"
+			gameDirectory = runDir
+			systemProperty 'neoforge.enabledGameTestNamespaces', neoModId
+		}
+
+		data {
+			clientData()
+			gameDirectory = runDir
+			programArguments.addAll '--mod', neoModId, '--all',
+					'--output', file('src/generated/resources/').getAbsolutePath(),
+					'--existing', file('src/main/resources/').getAbsolutePath()
+		}
+
+		configureEach {
+			systemProperty 'forge.logging.markers', 'REGISTRIES'
+			logLevel = Level.DEBUG
+		}
+	}
+
+	mods {
+		"${neoModId}" {
+			sourceSet(sourceSets.main)
+		}
+	}
+}
+
+sourceSets.main.resources {
+	srcDir 'src/generated/resources'
+	srcDir project(":common").file("src/main/resources")
+}
+
+configurations {
+	runtimeClasspath.extendsFrom localRuntime
+}
+
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+	var minecraftVersion = project.findProperty("neoforge_minecraft_version") ?: project.minecraft_version
+	var minecraftVersionRange = project.findProperty("neoforge_minecraft_version_range") ?: project.minecraft_version_range
+	var replaceProperties = [
+			minecraft_version      : minecraftVersion,
+			minecraft_version_range: minecraftVersionRange,
+			neo_version            : project.neoforge_version,
+			mod_id                 : neoModId,
+			mod_name               : project.mod_name,
+			mod_license            : 'CC0-1.0',
+			mod_version            : project.version,
+			mod_authors            : project.mod_authors,
+			mod_description        : project.mod_description
+	]
+	inputs.properties replaceProperties
+	expand replaceProperties
+	from "src/main/templates"
+	into "build/generated/sources/modMetadata"
+}
+
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+	it.options.release = 21
+}
+
+jar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	from(project(":common").sourceSets.main.output.classesDirs)
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+publishing {
+	publications {
+		register('mavenNeoForge', MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			url "file://${project.projectDir}/repo"
+		}
+	}
+}

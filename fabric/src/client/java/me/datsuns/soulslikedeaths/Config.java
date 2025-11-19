@@ -4,7 +4,7 @@ import me.datsuns.soulslikedeaths.common.SoulslikeDeathsConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 
-@me.shedaniel.autoconfig.annotation.Config(name = "soulslike-deaths")
+@me.shedaniel.autoconfig.annotation.Config(name = "soulslikedeaths")
 class Config implements ConfigData, SoulslikeDeathsConfig {
     boolean deathInWater = true;
     boolean deathOnDamaged = true;
